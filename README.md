@@ -1,99 +1,83 @@
-**📊 Insurance Claims Analysis – Power BI & Python**
+# 🏥 Insurance Claims Analysis – Case Study
 
-A complete end-to-end analysis of hospital insurance claims data using Power BI, Python, and Excel.
-This project includes data cleaning, KPI creation, advanced analytics, visualizations, and an interactive Power BI dashboard.
+## 📌 Executive Summary
+This case study explores insurance claims submitted by a healthcare provider in order to assess financial performance, identify operational inefficiencies, and understand denial patterns. Python was used for end-to-end data cleaning, KPI calculation, aggregation, and visualization.
 
+The analysis helps healthcare organizations:
+- Reduce claim denials  
+- Improve billing accuracy  
+- Optimize insurer relationships  
+- Identify costly procedures and diagnoses  
+- Improve revenue cycle efficiency  
 
-**📁 Project Overview
-**
-This repository contains:
-1. Raw claims dataset (claims_data.csv)
-2. Cleaned dataset (Power Query transformations)
-3. Python-generated metrics and exploratory analysis
-4. Power BI dashboard with financial, operational, and risk insights
-5. KPIs, DAX measures, and formulas
-6. Documentation on how to reproduce and extend the analysis
+---
 
+## 🎯 Business Problem
+Healthcare providers face increasing financial pressure due to:
+- High denial rates  
+- Reduced reimbursement  
+- Documentation errors  
+- Time-consuming manual follow-ups  
 
-🧼 1. Data Cleaning
+Claims data contains insights that can help resolve these issues — but only if analyzed correctly.
 
-Data was cleaned and transformed using Power Query.
-Steps performed:
-1. Converted dates to proper Date type
-2. Converted monetary fields to numeric
-3. Trimmed and cleaned text columns
-4. Standardized categorical fields (Paid / Denied / Under Review, etc.)
-5. Removed duplicates based on Claim ID
-6. Added optional calculated columns
-7. Created a dedicated Date dimension table for time-intelligence DAX
+---
 
+## 🗂️ Dataset Overview
 
-📈 2. Key Metrics (KPIs)
-Financial Metrics
-- Total Billed Amount
-- Total Allowed Amount
-- Total Paid Amount
-- Write-off Amount & %
-- Paid-to-Allowed Ratio
-- Allowed-to-Billed Ratio
+**Fields Included:**
 
-Operational Metrics
-- Total Claims
-- Denied Claims & Denial Rate
-- Follow-up Rate
-- Claim Status Distribution
+| Field | Description |
+|-------|-------------|
+| Claim ID | Unique claim identifier |
+| Provider ID | Physician or facility |
+| Patient ID | Unique patient identifier |
+| Date of Service | Date care was delivered |
+| Procedure Code | CPT/HCPCS code |
+| Diagnosis Code | ICD code |
+| Billed Amount | Total amount billed |
+| Allowed Amount | Amount insurer agreed |
+| Paid Amount | Final reimbursed amount |
+| Claim Status | Paid, Denied, Under Review |
+| AR Status | Open, Pending, On Hold, etc. |
+| Reason Code | Denial explanation |
+| Insurance Type | Medicare, Commercial, Self-Pay |
+| Follow-up Required | Yes/No indicator |
 
-Advanced Analytics
-- High-cost outlier detection
-- Fraud suspicion indicators
-- Procedure/Provider cost drivers
-- Trend forecasting (Python)
+---
 
+## 🎯 Objectives
 
-📘 3. DAX Measures (Core)
+### Financial Analysis
+- Compare billed vs allowed vs paid  
+- Analyze write-offs  
+- Identify high-cost procedures and diagnoses  
 
-- Total Claims = DISTINCTCOUNT(Claims[Claim ID])
-- Total Billed = SUM(Claims[Billed Amount])
-- Total Allowed = SUM(Claims[Allowed Amount])
-- Total Paid = SUM(Claims[Paid Amount])
-- Paid Claims = CALCULATE([Total Claims], FILTER(Claims, Claims[Claim Status]="Paid"))
-- Denied Claims = CALCULATE([Total Claims], FILTER(Claims, Claims[Claim Status]="Denied"))
-- Denial Rate = DIVIDE([Denied Claims], [Total Claims], 0)
-- Write-off Total = [Total Billed] - [Total Allowed]
-- Write-off % = DIVIDE([Write-off Total], [Total Billed], 0)
-- Allowed to Billed Ratio = DIVIDE([Total Allowed], [Total Billed], 0)
-- Paid to Allowed Ratio = DIVIDE([Total Paid], [Total Allowed], 0)
-- High Cost Threshold = AVERAGE(Claims[Billed Amount]) + 2 * STDEVX.P(Claims, Claims[Billed Amount])
+### Operational Analysis
+- Denial rate  
+- Follow-up requirement  
+- Claim status distribution  
+- AR status bottlenecks  
 
-  
+### Trend & Pattern Analysis
+- Month-over-month trends  
+- Provider performance variation  
+- Insurance payer patterns  
 
-📊 4. Power BI Dashboard
-Includes 4 pages:
-1️⃣ Summary
-- Claims KPIs
-- Denial rate
-- Write-off %
-- Trend charts
+---
 
-2️⃣ Financial Analysis
-- Billed vs Allowed vs Paid
-- Waterfall chart
-- Top-paying procedures/providers
+## 🧪 Methodology
 
-3️⃣ Operational Insights
-- Claim Status breakdown
-- Denial reason analysis
-- Provider performance
+### 1. Data Cleaning
+Performed using Pandas:
+- Convert dates  
+- Fix categorical values  
+- Standardize labels  
+- Convert financial fields to numeric  
 
-4️⃣ Risk & Outliers
-- High-cost claims
-- Suspicious activity patterns
-- Scatter plot comparison (Billed vs Paid)
-
-
-❤️ Acknowledgements
-This project was made for analyzing hospital insurance claims with a focus on financial efficiency, process improvement, and risk analytics.
-
-
-📣 Contributions
-Feel free to fork, improve visual design, add new models (ML, forecasting), or submit PRs.
+### 2. KPI Computation
+Using simple Pandas aggregations:
+```python
+total_billed = df["Billed Amount"].sum()
+denial_rate = denied_claims / total_claims
+write_off_pct = (total_billed - total_allowed) / total_billed
