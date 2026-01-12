@@ -104,16 +104,16 @@ df["Month"] = df["Date of Service"].dt.to_period("M")
 - Certain diagnoses and procedures account for disproportionate high costs.
 - Paid amounts fluctuate depending on insurance type.
 
-###🔧 Operational Findings
+### 🔧 Operational Findings
 - Denial rate indicates room for improvement in coding/documentation.
 - Some providers have higher follow-up requirements, signaling workflow issues.
 - Denial reasons such as Authorization Not Obtained appear frequently.
 
-###🧑‍⚕️ Provider Insights
+### 🧑‍⚕️ Provider Insights
 - Variation in billing and denial patterns across providers.
 - Some providers show consistently higher rejected claims.
 
-###📅 Trend Insights
+### 📅 Trend Insights
 - Monthly claim volumes and payments fluctuate.
 - Peak activity occurs in specific months, suggesting seasonality.
 
