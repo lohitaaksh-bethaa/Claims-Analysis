@@ -77,7 +77,81 @@ Performed using Pandas:
 
 ### 2. KPI Computation
 Using simple Pandas aggregations:
-```python
 total_billed = df["Billed Amount"].sum()
 denial_rate = denied_claims / total_claims
 write_off_pct = (total_billed - total_allowed) / total_billed
+
+### 3. Grouped Analysis
+Analysis by:
+1. Provider ID
+2. Insurance Type
+3. Procedure Code
+4. Diagnosis Code
+
+### 4.Trend Analysis
+Created monthly metrics:
+df["Month"] = df["Date of Service"].dt.to_period("M")
+
+### 5. Visualizations
+- Generated using Matplotlib:
+- Financial summary bar chart
+- Claim status pie chart
+- Monthly trend line chart
+
+## 📈 Key Findings
+### 💰 Financial Findings
+- Significant write-offs indicate a gap between billed and allowed amounts.
+- Certain diagnoses and procedures account for disproportionate high costs.
+- Paid amounts fluctuate depending on insurance type.
+
+###🔧 Operational Findings
+- Denial rate indicates room for improvement in coding/documentation.
+- Some providers have higher follow-up requirements, signaling workflow issues.
+- Denial reasons such as Authorization Not Obtained appear frequently.
+
+###🧑‍⚕️ Provider Insights
+- Variation in billing and denial patterns across providers.
+- Some providers show consistently higher rejected claims.
+
+###📅 Trend Insights
+- Monthly claim volumes and payments fluctuate.
+- Peak activity occurs in specific months, suggesting seasonality.
+
+### 🛠 Tools Used
+- Python: Pandas, NumPy, Matplotlib
+- GitHub for version control
+- CSV as primary data source
+
+### 🎒 Limitations
+- No timestamps for TAT (Turnaround Time) analysis
+- Dataset synthetic; no PHI/PII
+- No ML features in simplified script
+
+### 🚀 Future Enhancements
+## 1. Machine Learning
+- Predict claim denials
+- Forecast paid amounts
+
+## 2. Power BI Dashboard
+- Interactive visuals
+- Provider drill-downs
+- Denial driver insights
+
+## 3. Streamlit Web App
+- Upload CSV → instant analysis
+
+## 4. FastAPI
+- Build a denial prediction API
+
+### 🏁 Conclusion
+This project demonstrates how claims analytics can help healthcare providers:
+- Improve revenue cycle performance
+- Reduce operational inefficiencies
+- Understand denial patterns
+- Manage insurer relationships better
+This foundation can be expanded into a full analytics platform for healthcare operations.
+
+## Author
+**Lohitaaksh Bethaa**  
+Data Analyst
+
